@@ -1,0 +1,64 @@
+﻿@using System.Threading.Tasks
+@model Sakura.AspNetCore.IPagedList<BlogPostWithContentTagsViewModel>
+
+@if(Model.Any())
+{
+    <div class="row">
+        <div class="col-xs-12 no-padding">
+            <div class="pull-right">
+                <pager />
+            </div>
+        </div>
+    </div>
+
+    @foreach (var item in Model)
+    {
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row blog-post-preview-item">
+
+                        <h3 class="blog-post-preview-title">
+                            <a cacti-blog-title="@item.BlogPost.Title.RemoveSpecialCharacters()">
+                                @item.BlogPost.Title
+                            </a>
+                        </h3>
+                    <div class="blog-post-preview-info">
+                        <p>
+                            <i class="fa fa-calendar"></i>
+                            <i>@item.BlogPost.DatePublished.ToFormattedString()</i>
+                        </p>
+                        @if (item.ContentTags.Count > 0)
+                        {
+                            <p>
+                                <i class="fa fa-tag"></i>
+                                @foreach (var tag in item.ContentTags)
+                                {
+                                    <a asp-controller="blog" asp-action="index" asp-route-tag="@tag.Name">
+                                        @tag.Name 
+                                    </a>
+                                }
+                            </p>
+                        }
+                    </div>
+                    <div class="blog-post-preview-content">
+                        @Html.Raw(item.BlogPost.GetBlogPostSummary())
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-xs-12 no-padding">
+            <div class="pull-right">
+                <pager />
+            </div>
+        </div>
+    </div>
+}
+else 
+{
+    <div class="text-center">
+    <h3> No posts found...</h3>
+    </div>
+}

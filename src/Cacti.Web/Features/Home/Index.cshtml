@@ -1,0 +1,7 @@
+﻿@model Cacti.Web.Features.Home.HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "home";
+}
+
+@Html.Partial("~/Features/Blog/_BlogPosts.cshtml", Model.BlogPosts)

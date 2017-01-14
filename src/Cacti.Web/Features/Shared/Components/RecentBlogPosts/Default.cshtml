@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Cacti.Web.Features.Blog.ViewModels.BlogPostPreviewViewModel>
+
+@if (Model.Any())
+{
+    <ul id="recent-posts-list">
+        @foreach (var item in Model)
+        {
+            <a cacti-blog-title="@item.UrlTitle">
+                <li class="recent-posts-item">  
+                    @item.Title
+
+                    <div class="blog-post-preview-info">
+                        <i>
+                            @item.DatePublished.ToFormattedString()
+                        </i>
+                    </div>
+                </li>
+            </a>
+
+        }
+    </ul>
+}
+else
+{
+    <h3 class="text-center">No blog posts have been posted yet... Please come back later!</h3>
+}

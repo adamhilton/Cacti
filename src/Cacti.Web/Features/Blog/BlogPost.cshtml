@@ -1,0 +1,31 @@
+﻿@model Cacti.Web.Features.Blog.ViewModels.BlogPostContentViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="text-center">
+    <h2>@Model.Title</h2>
+    <div class="blog-post-info">
+        <i class="fa fa-calendar"></i>
+        <i>@Model.DatePublished.ToFormattedString()</i>
+        @if(Model.ContentTags.Count > 0)
+        {
+            <p>
+                <i class="fa fa-tag"></i>
+                @foreach(var tag in Model.ContentTags)
+                {
+                    <a asp-controller="blog" asp-action="index" asp-route-tag="@tag.Name">
+                        @tag.Name 
+                    </a>
+                }
+            </p>
+        }
+    </div>
+</div>
+
+<hr/>
+
+<div id="Blog-Post-Content">
+    @Html.Raw(Model.Body)
+</div>
