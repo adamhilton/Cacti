@@ -1,0 +1,6 @@
+* text=auto
+*.cs     diff=csharp
+
+# Linguist
+*.cshtml linguist-language=Html
+*.js linguist-vendored=true
